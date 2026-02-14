@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Mobile flicker fix */
+html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    min-height: 100vh;
+    background: 
+        linear-gradient(45deg, 
+            #620080 25%, 
+            #8a2be2 75%);
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    position: relative;
+    /* Hardware acceleration */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='52' viewBox='0 0 52 52' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M26 35.5C17.6 35.5 4 29.5 4 17.5 4 9.5 11.7 3 21.5 3c5.1 0 8.7 2.5 11.5 6 2.8-3.5 6.4-6 11.5-6C40.3 3 48 9.5 48 17.5c0 12-13.6 18-22 18z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.love-particle {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0;
+    animation: float 6s linear infinite;
+    will-change: transform;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+.message-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    width: 80%;
+    max-width: 800px;
+}
+
+.message {
+    opacity: 0;
+    position: absolute;
+    font-size: 2.5rem;
+    text-shadow: 0 0 15px rgba(255,50,150,0.5);
+    transform: translateY(50px);
+    transition: all 1.5s ease-in-out;
+    will-change: transform, opacity;
+}
+
+.message.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.message.exit {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.8);
+}
+
+.final-question {
+    display: none;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: reveal 1s forwards;
+}
+
+@keyframes reveal {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.btn-group {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.valentine-btn {
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.yes-btn {
+    background: #ff4081;
+    color: white;
+}
+
+.no-btn {
+    background: #616161;
+    color: white;
+}
+
+.valentine-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255,64,129,0.4);
+}
+
+.valentine-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+.celebration {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1000;
+    display: none;
+}
+
+.heart-burst {
+    position: absolute;
+    font-size: 2rem;
+    animation: burst 1s ease-out forwards;
+    will-change: transform;
+}
+
+@keyframes burst {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(5); opacity: 0; }
+}
+
+
+
+
+
+/* ---------- DRESS PAGE ---------- */
+
+.dress-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
+}
+
+.dress-title {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.dress-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.image-box {
+    width: 400px;
+    max-width: 90%;
+    height: 500px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 300px;
+}
+
+.upload-text {
+    color: white;
+    font-size: 1.2rem;
+}
+
+/* Hide actual input */
+#dressUpload {
+    display: none;
+}
+
+/* Mobile Responsive */
+@media(max-width:768px){
+    .dress-content{
+        flex-direction: column;
+    }
+}
+
+.image-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition: opacity 0.4s ease;
+}
+
