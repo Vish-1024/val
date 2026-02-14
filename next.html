@@ -25,8 +25,10 @@
                     #620080 25%, 
                     #8a2be2 75%);
             font-family: 'Courier New', monospace;
-            overflow: hidden;
             position: relative;
+            /* Changed from overflow: hidden to overflow-x: hidden */
+            overflow-x: hidden;
+            overflow-y: auto;
             /* Hardware acceleration */
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
@@ -52,6 +54,8 @@
             text-align: center;
             position: relative;
             z-index: 1;
+            /* Add padding bottom for mobile */
+            padding-bottom: 3rem;
         }
 
         .dress-title {
@@ -87,7 +91,7 @@
         .image-box img {
             width: 100%;
             height: 100%;
-            object-fit: contain;          /* better for full-body → prevents cropping head/feet */
+            object-fit: contain;
             object-position: center;
             transition: opacity 0.4s ease;
             background: rgba(0,0,0,0.2);
@@ -160,15 +164,43 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            .dress-container {
+                padding: 1.5rem;
+                padding-bottom: 3rem;
+            }
+            
             .dress-content {
                 flex-direction: column;
                 gap: 2.5rem;
             }
+            
             .image-box {
-                height: 520px;
+                height: 500px;
+                max-width: 95%;
             }
+            
             .dress-title {
-                font-size: 2.4rem;
+                font-size: 2.2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .upload-text {
+                font-size: 1.1rem;
+            }
+            
+            .valentine-btn {
+                padding: 0.9rem 2.5rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dress-title {
+                font-size: 1.8rem;
+            }
+            
+            .image-box {
+                height: 450px;
             }
         }
     </style>
@@ -267,7 +299,7 @@ Instructions:
 
 Use Image 1 as the base model (face, body proportions, hairstyle, identity).
 
-Replace her outfit with the dress from Image 2, ensuring accurate fabric texture, fit, color, and structural details.
+Replace her outfit with the dress from Image 2, ensuring accurate fabric texture, fit, color, and structural details. (If image 2 is a person wearing the dress, then do not use this person's body. Only use image 1 for body, face and hair.)
 
 Generate a full-body portrait, centered and fully visible from head to toe.
 
